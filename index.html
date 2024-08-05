@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Looping in Bash</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/concrete.css/3.0.0/concrete.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <style>
+        body {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        pre[class*="language-"] {
+            margin: 1em 0;
+        }
+        .note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #333;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .index {
+            border: 1px solid var(--fg);
+            border-radius: 4px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+        pre {
+          position: relative;
+          border-radius: 4px;
+        }
+        ul li + li {
+          margin-top: 0.5em;
+        }
+        body > footer {
+          margin: 3em 0px;
+        }
+        footer .me {
+          width: 2em;
+          vertical-align: middle;
+          margin-left: 1em;
+        }
+        .copy-button {
+          position: absolute;
+          top: 0.5em;
+          right: 0.5em;
+          background: transparent;
+          border: none;
+          font-size: 0.8em;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          transition: background-color 0.3s;
+          color: var(--bg);
+        }
+        .copy-button:hover svg {
+          border: 2px solid var(--bg);
+          border-radius: 4px;
+        }
+        .copy-button svg {
+            width: 32px;
+            height: 32px;
+            padding: 0.25em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Looping in Bash</h1>
+    
+    <div class="index">
+        <h3>Contents</h3>
+        <ul>
+            <li><a href="#for-loop-bash">For Loop</a></li>
+            <li><a href="#bash-while-loop">While Loop</a></li>
+            <li><a href="#bash-for-loop-array">Array For Loop</a></li>
+            <li><a href="#bash-loop-through-files">Loop Through Files in Directory</a></li>
+            <li><a href="#bash-infinite-loop">Infinite Loop</a></li>
+            <li><a href="#bash-until-loop">Until Loop</a></li>
+            <li><a href="#bash-loop-control">Loop Control</a></li>
+        </ul>
+    </div>
+
+    <div class="note">
+        <strong>Note:</strong> This guide ensures compatibility with Bash 3, which is the default on macOS and some older systems. All examples should work across Bash 3 and newer versions.
+    </div>
+
+    <h2 id="for-loop-bash">For Loop in Bash</h2>
+    <p>For loops are the most commonly used loops in Bash for iterating over a series of values.</p>
+    <pre><code class="language-bash">for item in list
+do
+    echo "$item"
+done</code></pre>
+
+    <h3>For Loop Variations</h3>
+    <h4>C-style For Loop</h4>
+    <pre><code class="language-bash">for ((i=0; i<10; i++))
+do
+    echo "$i"
+done</code></pre>
+
+    <h4>For Loop with Range (Bash 3 Compatible)</h4>
+    <pre><code class="language-bash">for i in $(seq 1 5)
+do
+    echo "$i"
+done</code></pre>
+
+    <div class="note">
+        <strong>Note:</strong> In Bash 4+, you can use <code>{1..5}</code> for ranges, but <code>seq</code> is more compatible across versions.
+    </div>
+
+    <h4>One-line For Loop</h4>
+    <pre><code class="language-bash">for i in $(seq 1 5); do echo "$i"; done</code></pre>
+
+    <h2 id="bash-while-loop">Bash While Loop</h2>
+    <p>While loops continue executing as long as a condition is true.</p>
+    <pre><code class="language-bash">count=1
+while [ $count -le 5 ]
+do
+    echo "$count"
+    count=$((count + 1))
+done</code></pre>
+
+    <h2 id="bash-for-loop-array">Bash For Loop Array</h2>
+    <p>Looping through arrays is a common task in Bash scripting.</p>
+    <pre><code class="language-bash">fruits=("apple" "banana" "cherry")
+for fruit in "${fruits[@]}"
+do
+    echo "$fruit"
+done</code></pre>
+
+    <h2 id="bash-loop-through-files">Bash Loop Through Files in Directory</h2>
+    <pre><code class="language-bash">for file in *
+do
+    echo "Processing $file"
+done</code></pre>
+
+    <div class="note">
+        <strong>Tip:</strong> When dealing with filenames that might contain spaces, always quote your variables: <code>"$file"</code>
+    </div>
+
+    <h2 id="bash-infinite-loop">Bash Infinite Loop</h2>
+    <pre><code class="language-bash">while true
+do
+    echo "This will run forever"
+    sleep 1
+done</code></pre>
+
+    <h2 id="bash-until-loop">Bash Until Loop</h2>
+    <p>Until loops continue executing until a condition becomes true.</p>
+    <pre><code class="language-bash">count=1
+until [ $count -gt 5 ]
+do
+    echo "$count"
+    count=$((count + 1))
+done</code></pre>
+
+    <h2 id="bash-loop-control">Bash Loop Control</h2>
+    <h3>Break Statement</h3>
+    <pre><code class="language-bash">for i in $(seq 1 10)
+do
+    if [ $i -eq 5 ]
+    then
+        break
+    fi
+    echo "$i"
+done</code></pre>
+
+    <h3>Continue Statement</h3>
+    <pre><code class="language-bash">for i in $(seq 1 5)
+do
+    if [ $i -eq 3 ]
+    then
+        continue
+    fi
+    echo "$i"
+done</code></pre>
+
+    <footer>Copyright
+      <a href="https://mccormick.cx" target="_BLANK">Chris McCormick
+        <img src="https://mccormick.cx/gfx/chris-mccormick-software-developer.jpg?bashloop" class="me">
+      </a>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const copyIcon = `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+        `;
+
+        document.querySelectorAll('pre').forEach((block) => {
+            const button = document.createElement('button');
+            button.className = 'copy-button';
+            button.innerHTML = copyIcon;
+            block.insertBefore(button, block.firstChild);
+
+            button.addEventListener('click', () => {
+                const code = block.querySelector('code');
+                const range = document.createRange();
+                range.selectNode(code);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+
+                try {
+                    document.execCommand('copy');
+                    button.innerHTML = 'Copied!';
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                    }, 2000);
+                } catch (e) {
+                    console.error('Failed to copy text: ', e);
+                }
+
+                window.getSelection().removeAllRanges();
+            });
+        });
+    });
+    </script>
+</body>
+</html>
