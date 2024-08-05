@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/concrete.css/3.0.0/concrete.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <!-- For iOS devices -->
+    <link rel="apple-touch-icon" href="logo.png">
+
     <meta name="description" content="A comprehensive guide to looping in Bash, including for loops, while loops, and more. Compatible with Bash 3 and newer versions.">
 
     <!-- Open Graph / Facebook -->
@@ -85,7 +90,7 @@
     </style>
 </head>
 <body>
-    <h1>Looping in Bash</h1>
+    <h1><img src="src/logo.svg"/> Looping in Bash</h1>
     
     <div class="index">
         <h3>Contents</h3>
@@ -118,14 +123,14 @@ do
     echo "$i"
 done</code></pre>
 
-    <h4>For Loop with Range (Bash 3 Compatible)</h4>
+    <h4>For Loop with Range</h4>
     <pre><code class="language-bash">for i in $(seq 1 5)
 do
     echo "$i"
 done</code></pre>
 
     <div class="note">
-        <strong>Note:</strong> In Bash 4+, you can use <code>{1..5}</code> for ranges, but <code>seq</code> is more compatible across versions.
+        <strong>Note:</strong> In Bash 4+, you can use <code>{1..5}</code> for ranges, but <code>seq</code> is more compatible across versions (including v3).
     </div>
 
     <h4>One-line For Loop</h4>
